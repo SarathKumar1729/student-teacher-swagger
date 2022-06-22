@@ -23,9 +23,9 @@ export class StudentService {
     //       return this.student;
     //     }
 
-    async findAll() {
+    async findAll(limit?:number) {
      
-      const result = await this.studentRepository.find();
+      const result = await this.studentRepository.find({take:limit});
     
       return result;
     }
@@ -37,15 +37,24 @@ export class StudentService {
     // }
     async Create(createStudentDto:student) {
       const exists =(await this.studentRepository.count({ where: { id: createStudentDto.id }, })) != 0 ? true : false;
-  
-      if (exists) {
-        throw new HttpException('Student ID already exists', 403);
-      }
-      this.studentRepository.save(createStudentDto);
-      return {
-        message: 'Successfully created',
+  try{
+    this.studentRepository.insert(createStudentDto);
+     return {
+       message: 'Successfully created',
       };
-    }
+  }
+  catch{
+    throw new HttpException('Student ID already exists', 403);
+  }
+}
+    //   if (exists) {
+    //     throw new HttpException('Student ID already exists', 403);
+    //   }
+    //   this.studentRepository.save(createStudentDto);
+    //   return {
+    //     message: 'Successfully created',
+    //   };
+    
 
     // findOne(id){
     //     let getid=this.student.filter(studentid=>studentid.id===id)

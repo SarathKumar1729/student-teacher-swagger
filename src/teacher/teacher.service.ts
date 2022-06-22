@@ -19,9 +19,9 @@ export class TeacherService {
     //       }
     //       return this.Teachers;
     //     }
-    async findAll() {
+    async findAll(limit?:number) {
        
-        const result = await this.teacherRepository.find();
+        const result = await this.teacherRepository.findAndCount({take:limit});
         return result;
       }
     

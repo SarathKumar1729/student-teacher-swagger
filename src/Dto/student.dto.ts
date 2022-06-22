@@ -47,5 +47,5 @@ export class student{
     type:'number',
 })
 
-   age:number;
+   age?:number;
 }                      

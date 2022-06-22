@@ -4,20 +4,14 @@ import { Dept } from "src/Enumarator/enumator";
 import { IsNull } from "typeorm";
 
 export class UpdateTeacher{
-@ApiPropertyOptional({
-    title:'Id',
-    description:'Id of the student',
-    type:'number'
-})
 
-  id?:number;
 
   @ApiPropertyOptional({
       title:'Name',
       description:'Name of the student',
       type:'string',
   })
-
+@IsString()
   name?: string;
   @ApiPropertyOptional({
     title:'Department',
@@ -25,14 +19,14 @@ export class UpdateTeacher{
     enum:Dept,
     enumName:'Department'
 })
-
+@IsString()
   Department?:Dept;
   @ApiPropertyOptional({
     title:'YOE',
     description:'Year Of Experience',
     type:'number',
 })
-
+@IsNumber()
   YOE?:number;
 
   @ApiPropertyOptional({
@@ -40,6 +34,7 @@ export class UpdateTeacher{
     description:'Age of the student',
     type:'number',
 })
+@IsNumber()
   age?:number;
 
 }
